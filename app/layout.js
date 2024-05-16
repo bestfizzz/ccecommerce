@@ -11,7 +11,22 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+
+
+        <script
+          type="module"
+          src="node_modules/@material-tailwind/html@latest/scripts/popover.js"
+        ></script>
+
+
+        <script
+          type="module"
+          src="https://unpkg.com/@material-tailwind/html@latest/scripts/popover.js"
+        ></script>
+      </body>
+
     </html>
   );
 }
