@@ -1,5 +1,7 @@
 import { Inter } from "next/font/google";
+import Layout from "@/components/Layout";
 import "./globals.css";
+import CartContextProvider from "@/components/Cart/CartContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,9 +14,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        {children}
-
-
+        <CartContextProvider>
+        <Layout>
+          {children}
+        </Layout>
+        </CartContextProvider>
         <script
           type="module"
           src="node_modules/@material-tailwind/html@latest/scripts/popover.js"

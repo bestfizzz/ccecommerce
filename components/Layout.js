@@ -1,5 +1,5 @@
 'use client'
-import Nav from '@/components/Nav';
+import Nav from '@/components/Nav/Nav';
 import Footer from '@/components/Footer';
 import { Inter } from 'next/font/google'
 
@@ -9,7 +9,7 @@ export default function Layout({ children }) {
     return (
         <div className={`flex min-h-screen flex-col items-center w-full ${inter.className} justify-between`}>
             <Nav />
-            <div className="px-2 sm:px-6 w-full">
+            <div className="w-full">
                 {children}
             </div>
             <Footer />

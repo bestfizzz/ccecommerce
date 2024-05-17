@@ -1,10 +1,14 @@
-import Image from "next/image";
-import Layout from "@/components/Layout";
+import Community from "@/components/HomePage/Community";
+import Hero from "@/components/HomePage/Hero";
+import Troll from "@/components/HomePage/Troll";
+
 
 export default function Home() {
   return (
-    <Layout>
-
-    </Layout>
+    <>
+      <Hero />
+      <Troll />
+      <Community />
+    </>
   );
 }
