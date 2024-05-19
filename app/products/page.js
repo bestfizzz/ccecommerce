@@ -5,15 +5,14 @@ import ProductHeader from '@/components/Products/ProductHeader';
 import { BreadcrumbProducts } from '@/components/Products/BreadCrumProducts';
 export default async function Products() {
     const getProductsData = async ()=>{
-        // const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/products`, {method: 'GET', cache:'no-cache'});
-        // return res.json()
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/products`, {method: 'GET'});
+        return res.json()
     }
     const products = await getProductsData()
     return (
         <div className='mx-4'>
             <BreadcrumbProducts />
             <ProductHeader />
-            <h1>{process.env.NEXT_PUBLIC_URL}/api/products</h1>
             <Suspense fallback={<Loading />}>
                 {products?
                 <ProductGrid products={products} />
