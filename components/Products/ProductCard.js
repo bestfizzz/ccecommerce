@@ -13,7 +13,6 @@ import { numberWithCommas } from "@/components/numberWithCommas";
 import Link from "next/link";
 export default function ProductCard({ product,setOpenAlert }) {
     const { addProductToCart } = useContext(CartContext)
-    console.log(product.images[0])
     return (
         <Card className="w-80 h-fit">
             <Link href={'/products/' + product._id}>
