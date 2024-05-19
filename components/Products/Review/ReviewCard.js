@@ -26,7 +26,7 @@ import {
    
   export default function ReviewCard() {
     return (
-      <Card color="transparent" shadow={false} className="w-full max-w-[26rem]">
+      <Card color="transparent" shadow={false} className="w-full max-w-[26rem] border-b-2">
         <CardHeader
           color="transparent"
           floated={false}
