@@ -8,6 +8,7 @@ import {
 import NestedMenu from "./CategoryMenu";
 import CartPopUp from "../Cart/CartPopUp";
 import { SearchBar, SearchBarMobile } from "./SearchBar";
+import Link from "next/link";
 
 
 
@@ -160,7 +161,7 @@ export default function NavbarWithSearch() {
             <div className="container mx-auto flex flex-wrap items-center justify-between text-blue-gray-900">
                 <Typography
                     as="a"
-                    href="#"
+                    href="/"
                     className="mr-4 cursor-pointer py-1.5 font-medium"
                 >
                     COCO

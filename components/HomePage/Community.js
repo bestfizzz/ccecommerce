@@ -57,14 +57,14 @@ export default function Community() {
                     color="blue-gray"
                     className="mb-4 !text-2xl lg:!text-4xl"
                 >
-                    Reviews from our consumers
+                    Why us?
                 </Typography>
                 <Typography
                     variant="lead"
                     className="max-w-3xl !text-gray-500 mb-10 lg:mb-20"
                 >
-                    From life-enhancing gadgets to unparalleled customer support, and
-                    transformative learning opportunities.
+                    From life-enhancing food to unparalleled customer support, and
+                    transformative way of eating.
                 </Typography>
                 <div className="grid gap-8 grid-cols-1 lg:grid-cols-2">
                     {testimonials.map((props, key) => (

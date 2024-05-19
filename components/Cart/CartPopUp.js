@@ -44,6 +44,10 @@ export default function CartPopUp() {
             }
         );
     }, [])
+    const MoveToCheckOut =()=>{
+        router.push('/checkout')
+        setOpen(false)
+    }
 
     return (
         <React.Fragment>
@@ -63,7 +67,7 @@ export default function CartPopUp() {
                         <span className="">Cart</span>
                     </Button>
                 </Badge>}
-            <Dialog size="xs" className="w-[99%] max-w-[690px] md:h-[525px]" open={open} handler={handleOpen}>
+            <Dialog size="md" className="w-[99%] md:min-w-[550px] max-w-[690px] md:h-[525px] md:px-3" open={open} handler={handleOpen}>
                 <DialogHeader className="justify-between">
                     <Typography className="ml-2" variant="h2">Cart</Typography>
                     <IconButton
@@ -79,7 +83,7 @@ export default function CartPopUp() {
                     <ItemsInCart />
                 </DialogBody>
                 <DialogFooter className="justify-between gap-2 md:pt-5 ">
-                    <Button onClick={() => router.push('/checkout/order')} variant="gradient" size="sm" fullWidth className="mb-2">
+                    <Button onClick={MoveToCheckOut} variant="gradient" size="sm" fullWidth className="mb-2">
                         <span>Check Out</span>
                     </Button>
                 </DialogFooter>

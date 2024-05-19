@@ -98,7 +98,7 @@ import {
             color="blue-gray"
             className="my-2 !text-2xl lg:!text-4xl"
           >
-            Meet the Team
+            Meet members of the farm
           </Typography>
         </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">

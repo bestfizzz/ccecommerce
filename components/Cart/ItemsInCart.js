@@ -14,7 +14,7 @@ export default function ItemsInCart() {
         router.push('/products/'+productId)
     }
     return (
-        <div class="scale-100 sm:scale-110 md:scale-120 ">
+        <div class="scale-100 sm:scale-110 md:scale-120 xl:scale-110 xl:mx-4">
             <div className={cartProducts.length > 3  ? showScrollbar : noScrollbar}>
                 {cartProducts.map(function (product) {
                     return (
