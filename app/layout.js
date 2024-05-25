@@ -12,8 +12,9 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const getCategoriesData = async ()=>{
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/categories`, {method: 'GET'},{ next: { revalidate: 3600 } });
-    return res.json()
+    // const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/categories`, {method: 'GET'},{ next: { revalidate: 3600 } });
+    // return res.json()
+    return []
   }
   const categoryList = await getCategoriesData()
   return (
