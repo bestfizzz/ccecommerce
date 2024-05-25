@@ -10,7 +10,6 @@ import {
 import Link from "next/link";
 
 export default function NestedMenu({ categoryList }) {
-    const [openMenu, setOpenMenu] = useState(false)
     return (
         <Menu placement="bottom-start" allowHover>
             <MenuHandler>
@@ -35,7 +34,7 @@ export default function NestedMenu({ categoryList }) {
             </MenuHandler>
             <MenuList>
                 {categoryList.map(category => {
-                    return menuIncursion(category)
+                    return MenuIncursion(category)
                 })
                 }
             </MenuList>
@@ -43,7 +42,7 @@ export default function NestedMenu({ categoryList }) {
     );
 }
 
-const menuIncursion = (category) => {
+const MenuIncursion = (category) => {
     if (category.children?.length > 0) {
         const [openNested, setOpenNested] = useState(false)
         return (
@@ -68,7 +67,7 @@ const menuIncursion = (category) => {
                 </MenuHandler>
                 <MenuList>
                     {category.children.map(childCategory => {
-                        return menuIncursion(childCategory)
+                        return MenuIncursion(childCategory)
                     })
                     }
                 </MenuList>
