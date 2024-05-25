@@ -3,17 +3,22 @@ import { db } from "./firebase";
 const categories = collection(db, 'categories');
 
 export const getCategories = async () => {
-    const snapshot = await getDocs(categories)
-    let list = []
-    snapshot.forEach(doc => {
-        let data = {
-            _id: doc.id,
-            ...doc.data()
-        }
-        list.push(data);
-    });
-    return buildHierarchy(list)
-}
+    try {
+        const snapshot = await getDocs(categories);
+        let list = [];
+        snapshot.forEach(doc => {
+            let data = {
+                _id: doc.id,
+                ...doc.data()
+            };
+            list.push(data);
+        });
+        return buildHierarchy(list);
+    } catch (error) {
+        console.error("Error fetching categories:", error);
+        throw error; // Rethrow the error to be handled by the caller
+    }
+};
 
 function buildHierarchy(data) {
     // Create a map of items by their _id
