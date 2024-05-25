@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import Layout from "@/components/Layout";
 import "./globals.css";
 import CartContextProvider from "@/components/Cart/CartContext";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,9 +22,11 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <CartContextProvider>
+        <Suspense>
         <Layout categoryList={categoryList}>
           {children}
         </Layout>
+        </Suspense>
         </CartContextProvider>
 
         <script
