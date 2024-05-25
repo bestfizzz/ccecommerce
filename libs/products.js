@@ -50,3 +50,20 @@ export const getProductsByCategory = async (category) => {
         throw error;
     }
 };
+
+export const getProductsBySearch = async (search) => {
+    try {
+        const snapshot = await getDocs(productsCollection);
+        const productList = snapshot.docs
+            .map(doc => ({ _id: doc.id, ...doc.data() }))
+            .filter(product => {
+                // Check if the product name contains the search term
+                return product.title.toLowerCase().includes(search.toLowerCase());
+                // You can extend this logic to search in other fields like description, etc.
+            });
+        return productList;
+    } catch (error) {
+        console.error("Error fetching products:", error);
+        throw error;
+    }
+};

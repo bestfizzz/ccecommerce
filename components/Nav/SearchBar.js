@@ -3,13 +3,14 @@ import {
     Button,
     Input,
 } from "@material-tailwind/react"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 export function SearchBar() {
+    const router = useRouter()
     const [searchText, setSearchText]=useState('')
     const search=()=>{
         const searchValue=searchText
-        setSearchText('')
-        console.log(searchValue)
+        router.push(`/products?search=${searchValue}`)
     }
     const onChange=({target})=>{
         setSearchText(target.value)
@@ -22,6 +23,7 @@ export function SearchBar() {
                 placeholder="Search"
                 value={searchText}
                 onChange={onChange}
+                onKeyDown={e=>{e.key==="Enter" ? search() : console.log(e)}}
                 containerProps={{
                     className: "min-w-[245px] w-[345px]",
                 }}

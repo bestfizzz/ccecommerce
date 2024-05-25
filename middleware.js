@@ -6,7 +6,7 @@ export function middleware(request) {
     const { pathname } = request.nextUrl;
 
     // Example: Check if the user is authenticated
-    const isAuthenticated = true; // Replace with your actual authentication check
+    const isAuthenticated = false; // Replace with your actual authentication check
 
     // Detect if the path starts with /user
     if (pathname.startsWith('/user')) {

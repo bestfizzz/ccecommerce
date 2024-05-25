@@ -7,6 +7,7 @@ import {
     Button,
     Typography,
 } from "@material-tailwind/react";
+import Link from "next/link";
 
 export default function Login() {
     const [email, setEmail] = useState('')
@@ -63,16 +64,16 @@ export default function Login() {
                     </Button>
 
                     <Typography color="gray" className="mt-4 text-center font-normal">
-                        <a href="/user/forget-password" className="font-medium text-gray-900 text-center">
+                        <Link href="/user/forget-password" className="font-medium text-gray-900 text-center">
                             Forgot password?
-                        </a>
+                        </Link>
                     </Typography>
 
                     <Typography color="gray" className="mt-4 text-center font-normal">
                         Don&apos;t have an account?{" "}
-                        <a href="/user/signup" className="font-medium text-gray-900">
+                        <Link href="/user/signup" className="font-medium text-gray-900">
                             Sign Up
-                        </a>
+                        </Link>
                     </Typography>
                 </form>
             </Card>
