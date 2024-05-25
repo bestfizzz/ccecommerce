@@ -26,7 +26,7 @@ import {
    
   export default function ReviewCard() {
     return (
-      <Card color="transparent" shadow={false} className="w-full max-w-[26rem] border-b-2">
+      <Card color="transparent" shadow={false} className="w-full border-b-2">
         <CardHeader
           color="transparent"
           floated={false}
@@ -44,13 +44,6 @@ import {
               <Typography variant="h5" color="blue-gray">
                 Tania Andrew
               </Typography>
-              <div className="5 flex items-center gap-0">
-                <StarIcon />
-                <StarIcon />
-                <StarIcon />
-                <StarIcon />
-                <StarIcon />
-              </div>
             </div>
             <Typography color="blue-gray">Frontend Lead @ Google</Typography>
           </div>

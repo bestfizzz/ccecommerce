@@ -9,10 +9,8 @@ import {
 } from "@material-tailwind/react";
 import Link from "next/link";
 
-export default function NestedMenu() {
+export default function NestedMenu({ categoryList }) {
     const [openMenu, setOpenMenu] = useState(false)
-    const [openMenu1, setOpenMenu1] = useState(false)
-    const [openMenu2, setOpenMenu2] = useState(false)
     return (
         <Menu placement="bottom-start" allowHover>
             <MenuHandler>
@@ -36,79 +34,53 @@ export default function NestedMenu() {
                 </Link>
             </MenuHandler>
             <MenuList>
-                <MenuItem>Menu Item 1</MenuItem>
-                <MenuItem>Menu Item 2</MenuItem>
-                <Menu
-                    placement="right-start"
-                    open={openMenu}
-                    handler={setOpenMenu}
-                    allowHover
-                    offset={15}
-                >
-                    <MenuHandler className="flex items-center justify-between">
-                        <MenuItem>
-                            Nested Item
-                            <ChevronUpIcon
-                                strokeWidth={2.5}
-                                className={`h-3.5 w-3.5 transition-transform ${openMenu ? "rotate-90" : ""
-                                    }`}
-                            />
-                        </MenuItem>
-                    </MenuHandler>
-                    <MenuList>
-                        <MenuItem>Nested Item 1</MenuItem>
-                        <MenuItem>Nested Item 2</MenuItem>
-                        <MenuItem>Nested Item 3</MenuItem>
-                    </MenuList>
-                </Menu>
-                <Menu
-                    placement="left-start"
-                    open={openMenu1}
-                    handler={setOpenMenu1}
-                    allowHover
-                    offset={15}
-                >
-                    <MenuHandler className="flex items-center justify-between">
-                        <MenuItem>
-                            Nested Item
-                            <ChevronUpIcon
-                                strokeWidth={2.5}
-                                className={`h-3.5 w-3.5 transition-transform ${openMenu1 ? "rotate-90" : ""
-                                    }`}
-                            />
-                        </MenuItem>
-                    </MenuHandler>
-                    <MenuList>
-                        <MenuItem>Nested Item 1</MenuItem>
-                        <MenuItem>Nested Item 2</MenuItem>
-                        <MenuItem>Nested Item 3</MenuItem>
-                        <Menu
-                            placement="left-start"
-                            open={openMenu2}
-                            handler={setOpenMenu2}
-                            allowHover
-                            offset={15}
-                        >
-                            <MenuHandler className="flex items-center justify-between">
-                                <MenuItem>
-                                    Nested Item
-                                    <ChevronUpIcon
-                                        strokeWidth={2.5}
-                                        className={`h-3.5 w-3.5 transition-transform ${openMenu2 ? "rotate-90" : ""
-                                            }`}
-                                    />
-                                </MenuItem>
-                            </MenuHandler>
-                            <MenuList>
-                                <MenuItem>Nested Item 1</MenuItem>
-                                <MenuItem>Nested Item 2</MenuItem>
-                                <MenuItem>Nested Item 3</MenuItem>
-                            </MenuList>
-                        </Menu>
-                    </MenuList>
-                </Menu>
-                <MenuItem>Menu Item 3</MenuItem>
+                {categoryList.map(category => {
+                    return menuIncursion(category)
+                })
+                }
             </MenuList>
         </Menu>
     );
+}
+
+const menuIncursion = (category) => {
+    if (category.children?.length > 0) {
+        const [openNested, setOpenNested] = useState(false)
+        return (
+            <Menu
+                placement="right-start"
+                open={openNested}
+                handler={setOpenNested}
+                allowHover
+                offset={15}
+            >
+                <MenuHandler className="flex items-center justify-between">
+                    <Link href={`/products/${category.name}`}>
+                        <MenuItem className="flex items-center justify-between">
+                            {category.name}
+                            <ChevronUpIcon
+                                strokeWidth={2.5}
+                                className={`h-3.5 w-3.5 transition-transform ${openNested ? "rotate-90" : ""
+                                    }`}
+                            />
+                        </MenuItem>
+                    </Link>
+                </MenuHandler>
+                <MenuList>
+                    {category.children.map(childCategory => {
+                        return menuIncursion(childCategory)
+                    })
+                    }
+                </MenuList>
+            </Menu>
+        )
+    } else {
+        return (
+            <Link href={`/products/${category.name}`}>
+                <MenuItem>
+                    {category.name}
+                </MenuItem>
+            </Link>
+        )
+    }
 }

@@ -6,12 +6,17 @@ export function middleware(request) {
     const { pathname } = request.nextUrl;
 
     // Example: Check if the user is authenticated
-    const isAuthenticated = false; // Replace with your actual authentication check
+    const isAuthenticated = true; // Replace with your actual authentication check
 
     // Detect if the path starts with /user
     if (pathname.startsWith('/user')) {
+
+        if (pathname === '/user/forget-password' ) {
+            return NextResponse.next();
+        }
+
         // Redirect authenticated users from /user/login or /user/signup to their user page
-        if ((pathname === '/user/login' || pathname === '/user/signup') && isAuthenticated) {
+        if ((pathname === '/user/login' || pathname === '/user/signup' || pathname === '/user') && isAuthenticated) {
             const userID = '123'; // Replace with actual user ID retrieval logic
             return NextResponse.redirect(new URL(`/user/${userID}`, request.url));
         }

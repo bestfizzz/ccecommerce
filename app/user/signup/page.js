@@ -1,4 +1,5 @@
 'use client'
+import { useState } from "react";
 import {
     Card,
     Input,
@@ -8,6 +9,14 @@ import {
 } from "@material-tailwind/react";
 
 export default function SignUp() {
+    const [name,setName] = useState('')
+    const [email,setEmail] = useState('')
+    const [password,setPassword] = useState('')
+    const [ticked,setTicked] = useState(false)
+    const Login=()=>{
+        const data={name,email,password} 
+        console.log(data)
+    }
     return (
         <div className="flex justify-center min-h-screen items-center">
             <Card color="transparent" shadow={false}>
@@ -26,10 +35,13 @@ export default function SignUp() {
                             <Input
                                 size="lg"
                                 placeholder="John Doe"
+                                value={name}
+                                onChange={ev=>setName(ev.target.value)}
                                 className="!border-t-blue-gray-200 focus:!border-t-gray-900"
                                 labelProps={{
                                     className: "before:content-none after:content-none",
                                 }}
+
                             />
                         </div>
                         <div>
@@ -39,6 +51,8 @@ export default function SignUp() {
                             <Input
                                 size="lg"
                                 placeholder="name@mail.com"
+                                value={email}
+                                onChange={ev=>setEmail(ev.target.value)}
                                 className="!border-t-blue-gray-200 focus:!border-t-gray-900"
                                 labelProps={{
                                     className: "before:content-none after:content-none",
@@ -53,6 +67,8 @@ export default function SignUp() {
                                 type="password"
                                 size="lg"
                                 placeholder="********"
+                                value={password}
+                                onChange={ev=>setPassword(ev.target.value)}
                                 className="!border-t-blue-gray-200 focus:!border-t-gray-900"
                                 labelProps={{
                                     className: "before:content-none after:content-none",
@@ -61,6 +77,8 @@ export default function SignUp() {
                         </div>
                     </div>
                     <Checkbox
+                        onClick={()=> setTicked(!ticked)}
+                        value={ticked}
                         label={
                             <Typography
                                 variant="small"
@@ -78,9 +96,16 @@ export default function SignUp() {
                         }
                         containerProps={{ className: "-ml-2.5" }}
                     />
-                    <Button className="mt-6" fullWidth>
+                    <Button className="mt-6"  disabled={!email || !password || !ticked} fullWidth onClick={Login} color='green'>
                         Sign Up
                     </Button>
+
+                    <Typography color="gray" className="mt-4 text-center font-normal">
+                        <a href="/user/forget-password" className="font-medium text-gray-900 text-center">
+                            Forgot password?
+                        </a>
+                    </Typography>
+                    
                     <Typography color="gray" className="mt-4 text-center font-normal">
                         Already have an account?{" "}
                         <a href="/user/login" className="font-medium text-gray-900">

@@ -63,7 +63,7 @@ return (
                 containerProps={{ className: "-ml-2.5" }}
                 onClick={() => setTicked(!ticked)}
             />
-            <Button color={ticked && cost > 0 ? '' : "gray"} type="submit" className="mt-6" fullWidth>
+            <Button color='green' disabled={!ticked || cost <= 0} type="submit" className="mt-6" fullWidth>
                 Comfirm
             </Button>
         </form>

@@ -11,7 +11,7 @@ export default function UserMenu() {
     return (
         <Menu placement="bottom-start" allowHover>
             <MenuHandler>
-                <Link href="/products">
+                <Link href="/user">
                     <button data-ripple-light="true" data-popover-target="menu-1" data-popover-nested="true"
                         class="relative select-none rounded-lg text-center align-middle font-sans text-xs font-medium text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                     >
@@ -38,8 +38,12 @@ export default function UserMenu() {
                 </Link>
             </MenuHandler>
             <MenuList>
-                <MenuItem>Menu Item 1</MenuItem>
-                <MenuItem>Menu Item 2</MenuItem>
+                <MenuItem>
+                <Link href="/user">Menu Item 1</Link>
+                </MenuItem>
+                <MenuItem>
+                <Link href="/user/login">Menu Item 1</Link>
+                </MenuItem>
             </MenuList>
         </Menu>
     )

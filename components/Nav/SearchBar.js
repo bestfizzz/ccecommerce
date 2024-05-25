@@ -3,14 +3,25 @@ import {
     Button,
     Input,
 } from "@material-tailwind/react"
+import { useState } from "react"
 export function SearchBar() {
-    
+    const [searchText, setSearchText]=useState('')
+    const search=()=>{
+        const searchValue=searchText
+        setSearchText('')
+        console.log(searchValue)
+    }
+    const onChange=({target})=>{
+        setSearchText(target.value)
+    }
     return(
     <div className="hidden items-center gap-x-2 lg:flex">
         <div className="relative flex w-full gap-2 md:w-max">
             <Input
                 type="search"
                 placeholder="Search"
+                value={searchText}
+                onChange={onChange}
                 containerProps={{
                     className: "min-w-[245px] w-[345px]",
                 }}
@@ -41,7 +52,7 @@ export function SearchBar() {
                 </svg>
             </div>
         </div>
-        <Button size="sm" className="rounded-lg ">
+        <Button size="sm" className="rounded-lg " onClick={search}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 23 23" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
             </svg>

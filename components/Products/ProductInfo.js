@@ -1,6 +1,7 @@
 'use client'
 import { useContext, useEffect, useState } from "react";
-import { Typography, Spinner, Button, Alert } from "@material-tailwind/react";
+import { Typography, Button, Alert } from "@material-tailwind/react";
+import capitalize from "../capitalize";
 import ProductImages from "@/components/Products/ProductImages";
 import { CartContext } from "@/components/Cart/CartContext";
 export default function ProductInfo({ productInfo }) {
@@ -28,9 +29,6 @@ export default function ProductInfo({ productInfo }) {
         setOpenAlert(true)
     }
 
-    function capitalize(s) {
-        return s[0].toUpperCase() + s.slice(1);
-    }
     return (
         <>
             <div className="flex flex-col sm:flex-row justify-center mt-8">

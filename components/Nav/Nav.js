@@ -13,7 +13,7 @@ import UserMenu from "./UserMenu";
 
 
 
-export default function NavbarWithSearch() {
+export default function NavbarWithSearch({categoryList}) {
     const [openNav, setOpenNav] = React.useState(false);
 
     React.useEffect(() => {
@@ -62,7 +62,7 @@ export default function NavbarWithSearch() {
                     Account
                 </a>
             </Typography> */}
-            <NestedMenu />
+            <NestedMenu categoryList={categoryList}/>
             <Typography as="li" variant="small" color="blue-gray" className="flex items-center gap-x-2 p-1 font-medium">
                 <svg
                     width="14"
@@ -199,7 +199,7 @@ export default function NavbarWithSearch() {
                 </a>
             </Typography>  */}
             <UserMenu />
-            <NestedMenu />
+            <NestedMenu categoryList={categoryList} />
             <Typography as="li" variant="small" color="blue-gray" className="flex items-center gap-x-2 p-1 font-medium">
                 <svg
                     width="14"
