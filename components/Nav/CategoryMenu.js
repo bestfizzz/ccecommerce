@@ -43,8 +43,8 @@ export default function NestedMenu({ categoryList }) {
 }
 
 const MenuIncursion = (category) => {
+    const [openNested, setOpenNested] = useState(false)
     if (category.children?.length > 0) {
-        const [openNested, setOpenNested] = useState(false)
         return (
             <Menu
                 placement="right-start"
