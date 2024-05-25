@@ -13,6 +13,8 @@ export const metadata = {
 
 export const getCategoriesData = async ()=>{
   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/products?get=all`, {method: 'GET'},{ next: { revalidate: 3600 } });
+  const res1 = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/categories`, {method: 'GET'},{ next: { revalidate: 3600 } });
+  console.log(res1.json())
   return res.json()
 }
 
