@@ -43,18 +43,24 @@ export default function UserMenu() {
             </MenuHandler>
             {!user ?
                 <MenuList>
+                    <Link href="/user/signup">
+                        <MenuItem>
+                            Sign up
+                        </MenuItem>
+                    </Link>
+                    <Link href="/user/login">
                     <MenuItem>
-                        <Link href="/user/signup">Sign up</Link>
+                    Login
                     </MenuItem>
-                    <MenuItem>
-                    <Link href="/user/login">Login</Link>
-                    </MenuItem>
+                    </Link>
                 </MenuList>
                 :
                 <MenuList>
+                    <Link href="/user/myprofile">
                     <MenuItem>
-                        <Link href="/user/myprofile">Orders</Link>
+                        Orders
                     </MenuItem>
+                    </Link>
                     <MenuItem>
                         <Link href='' role="button" onClick={signout}>Logout</Link>
                     </MenuItem>

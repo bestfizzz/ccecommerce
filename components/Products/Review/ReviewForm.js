@@ -3,9 +3,11 @@ import { Textarea, Button, IconButton } from "@material-tailwind/react";
 import UserAvatar from "./UserAvatar";
 import { useState,useContext } from "react";
 import { AuthContext } from "@/components/User/AuthContext";
+import { useRouter } from "next/navigation";
 
 export default function ReviewForm({productInfo}) {
     const [review,setReview] = useState('')
+    const router = useRouter()
     const { user } = useContext(AuthContext)
     const postReview=async()=>{
         const data = {
@@ -20,6 +22,10 @@ export default function ReviewForm({productInfo}) {
             },
             body: JSON.stringify(data)
         })
+        if(res.status===200){
+            setReview('')
+            router.refresh()
+        }
     }
     return (
         <div>
