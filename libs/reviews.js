@@ -33,7 +33,6 @@ export const postProductReview = async (username,review,productID) => {
             createdAt: serverTimestamp(),
         }
         const postReview = await addDoc(reviewsCollection, data);
-        console.log('Review added with ID: ', postReview.id);
         return postReview.id;
     } catch (error) {
         console.error('Error adding review: ', error);

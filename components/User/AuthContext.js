@@ -13,11 +13,9 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         // Listen for authentication state changes
         const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-            console.log(firebaseUser)
             if (firebaseUser) {
                 // If user is authenticated
-                setUser(firebaseUser);
-                console.log(firebaseUser.uid)
+                setUser(firebaseUser)
             } else {
                 // If user is not authenticated
                 setUser(null);
@@ -31,12 +29,23 @@ export const AuthProvider = ({ children }) => {
 
     // Login function
     const login = async (email, password) => {
-        return await loginWithEmailPassword(email, password)
+        try {
+            return await loginWithEmailPassword(email, password);
+        } catch (error) {
+            console.error('Error during login:', error); // Log the error
+            throw error; // Rethrow the error to be caught by the caller
+        }
     };
+
 
     // Signup function
     const signup = async (name, email, password) => {
-        return await signUpWithEmailPassword(name, email, password)
+        try {
+            return await signUpWithEmailPassword(name, email, password)
+        } catch (error) {
+            console.error('Error during login:', error); // Log the error
+            throw error; // Rethrow the error to be caught by the caller
+        }
     };
 
     // Logout function

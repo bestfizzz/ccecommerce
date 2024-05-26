@@ -57,3 +57,21 @@ function buildHierarchy(data) {
 
     return result;
 }
+
+export const getCategoriesList = async () => {
+    try {
+        const snapshot = await getDocs(categories);
+        let list = [];
+        snapshot.forEach(doc => {
+            let data = {
+                _id: doc.id,
+                ...doc.data()
+            };
+            list.push(data);
+        });
+        return list;
+    } catch (error) {
+        console.error("Error fetching categories:", error);
+        throw error; // Rethrow the error to be handled by the caller
+    }
+};

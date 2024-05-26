@@ -1,4 +1,4 @@
-import { getProduct, getProducts, getProductsByCategory,getProductsBySearch } from "@/libs/products"
+import { getProduct, getProducts, getProductsByCategoryDesendences,getProductsBySearch } from "@/libs/products"
 import sanitize from "@/components/sanatize"
 
 export async function GET(req) {
@@ -19,7 +19,7 @@ export async function GET(req) {
     }
 
     if (get?.toLowerCase() == 'category' && category) {
-        let res = category.toLowerCase() == 'all' ? await getProducts() : await getProductsByCategory(category)
+        let res = category.toLowerCase() == 'all' ? await getProducts() : await getProductsByCategoryDesendences(category)
         return Response.json(res)
     }
 

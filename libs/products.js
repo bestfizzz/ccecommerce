@@ -1,7 +1,9 @@
 import { collection, getDocs, doc, getDoc, query, where } from "firebase/firestore";
 import { db } from "./firebase";
+import { getCategoriesList } from "./categories";
 
 const productsCollection = collection(db, 'products');
+const categoryStructure = await getCategoriesList()
 
 export const getProduct = async (id) => {
     try {
@@ -47,6 +49,28 @@ export const getProductsByCategory = async (category) => {
         return productList;
     } catch (error) {
         console.error("Error fetching products by category:", error);
+        throw error;
+    }
+};
+
+export const getProductsByCategoryDesendences = async (category, productList = []) => {
+    try {
+        // Get products from the current category
+        const products = await getProductsByCategory(category);
+        // Add products to the productList
+        productList.push(...products);
+        const categoryProperties = categoryStructure.find(c => { return c.parentCategory == category })
+        // Recursively get products from each child category
+        console.log(productList,'list')
+        if (categoryProperties) {
+            for (const childCategory of [categoryProperties]) {
+                console.log(childCategory,'child')
+                await getProductsByCategoryDesendences(childCategory?.name, productList);
+            }
+        }
+        return productList;
+    } catch (error) {
+        console.error("Error fetching products from category and descendants:", error);
         throw error;
     }
 };

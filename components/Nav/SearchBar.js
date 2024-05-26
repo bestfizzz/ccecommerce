@@ -23,7 +23,7 @@ export function SearchBar() {
                 placeholder="Search"
                 value={searchText}
                 onChange={onChange}
-                onKeyDown={e=>{e.key==="Enter" ? search() : console.log(e)}}
+                onKeyDown={e=>{e.key==="Enter" ? search() : ''}}
                 containerProps={{
                     className: "min-w-[245px] w-[345px]",
                 }}

@@ -3,7 +3,6 @@ import ProductCard from '@/components/Products/ProductCard';
 import { Alert, Typography } from '@material-tailwind/react';
 import { useEffect, useState } from 'react';
 export default function ProductGrid({ products }) {
-    console.log(products)
     const [openAlert, setOpenAlert] = useState(false);
     useEffect(() => {
         if (openAlert == true) {
