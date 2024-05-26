@@ -108,7 +108,7 @@ export default function Login() {
                     mount: { y: 0 },
                     unmount: { y: 100 },
                 }}
-                className='ml-3 sm:ml-8 w-[95%] bottom-[5%] fixed'
+                className='ml-3 sm:ml-8 w-[95%] bottom-[5%] fixed z-50'
                 color="red"
                 variant="gradients"
             >
