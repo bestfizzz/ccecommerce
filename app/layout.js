@@ -4,6 +4,7 @@ import "./globals.css";
 import CartContextProvider from "@/components/Cart/CartContext";
 import { Suspense } from "react";
 import { getCategories } from "@/libs/categories";
+import { AuthProvider } from "@/components/User/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +18,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <AuthProvider>
         <CartContextProvider>
         <Suspense>
         <Layout categoryList={categoryList}>
@@ -24,7 +26,7 @@ export default async function RootLayout({ children }) {
         </Layout>
         </Suspense>
         </CartContextProvider>
-
+        </AuthProvider>
         <script
           type="module"
           src="https://unpkg.com/@material-tailwind/html@latest/scripts/popover.js"

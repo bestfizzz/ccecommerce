@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import {
     Card,
     Input,
@@ -8,14 +8,31 @@ import {
     Typography,
 } from "@material-tailwind/react";
 import Link from "next/link";
+import { redirect,useRouter } from "next/navigation";
+import { AuthContext } from "@/components/User/AuthContext";
 
 export default function Login() {
+    const { login,user } = useContext(AuthContext)
+    const router = useRouter()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const Login = () => {
-        const data = { email, password }
-        console.log(data)
-    }
+    useEffect(() => {
+        if (user) {
+            router.push(`/user/myprofile`);
+        }
+    }, [user, router]);
+    const Login = async () => {
+        const data = { email, password };
+        try {
+            const response = await login(email, password)
+            console.log(response)
+            router.refresh(`/user/myprofile`)
+        } catch (error) {
+            console.error('Error:', error.message);
+        }
+    };
+    
+    
     return (
         <div className="flex px-2 sm:px-0 justify-center min-h-screen items-center">
             <Card color="transparent" shadow={false}>

@@ -7,7 +7,11 @@ import {
     Typography,
 } from "@material-tailwind/react";
 import Link from "next/link";
+import { useContext } from "react";
+import { AuthContext } from "../User/AuthContext";
+
 export default function UserMenu() {
+    const { user, signout } = useContext(AuthContext)
     return (
         <Menu placement="bottom-start" allowHover>
             <MenuHandler>
@@ -31,20 +35,31 @@ export default function UserMenu() {
                                 />
                             </svg>
                             <p role="button" className="flex items-center">
-                                Account
+                                {user ? user.displayName : 'Account'}
                             </p>
                         </Typography>
                     </button>
                 </Link>
             </MenuHandler>
-            <MenuList>
-                <MenuItem>
-                <Link href="/user">Menu Item 1</Link>
-                </MenuItem>
-                <MenuItem>
-                <Link href="/user/login">Menu Item 1</Link>
-                </MenuItem>
-            </MenuList>
+            {!user ?
+                <MenuList>
+                    <MenuItem>
+                        <Link href="/user/signup">Sign up</Link>
+                    </MenuItem>
+                    <MenuItem>
+                    <Link href="/user/login">Login</Link>
+                    </MenuItem>
+                </MenuList>
+                :
+                <MenuList>
+                    <MenuItem>
+                        <Link href="/user/myprofile">Orders</Link>
+                    </MenuItem>
+                    <MenuItem>
+                        <Link href='' role="button" onClick={signout}>Logout</Link>
+                    </MenuItem>
+                </MenuList>
+            }
         </Menu>
     )
 }

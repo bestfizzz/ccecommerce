@@ -10,7 +10,12 @@ export default async function ProductPage({ params }) {
         const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/products?get=product&id=${id}`, { method: 'GET', cache: 'no-cache' });
         return res.json()
     }
+    const getProductReviews = async (id) => {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/reviews?id=${id}`, { method: 'GET', cache: 'no-cache' });
+        return res.json()
+    }
     const productInfo = await getProductData(id)
+    const reviews = await getProductReviews(id)
     return (
         <div>
             <Suspense fallback={<Loading />}>
@@ -18,7 +23,7 @@ export default async function ProductPage({ params }) {
                     <>
                         <BreadcrumbProduct product_name={productInfo.title} />
                         <ProductInfo productInfo={productInfo} />
-                        <Review />
+                        <Review productInfo={productInfo} reviews={reviews}/>
                     </>
                     :
                     <h1>Falied to get prodcut</h1>

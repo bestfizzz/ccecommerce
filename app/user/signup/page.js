@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react";
+import { useState,useContext, useEffect } from "react";
 import {
     Card,
     Input,
@@ -8,16 +8,32 @@ import {
     Typography,
 } from "@material-tailwind/react";
 import Link from "next/link";
+import { AuthContext } from "@/components/User/AuthContext";
+import { redirect,useRouter } from "next/navigation";
 
 export default function SignUp() {
-    const [name,setName] = useState('')
-    const [email,setEmail] = useState('')
-    const [password,setPassword] = useState('')
-    const [ticked,setTicked] = useState(false)
-    const signup=()=>{
-        const data={name,email,password} 
-        console.log(data)
+    const { signup, user } = useContext(AuthContext)
+    const router = useRouter()
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [ticked, setTicked] = useState(false)
+    const Signup = async () => {
+        const data = { name, email, password }
+        try {
+            const response = await signup(name,email, password)
+            console.log(response)
+            router.refresh(`/user/myprofile`)
+        } catch (error) {
+            console.error('Error:', error.message);
+        }
     }
+    useEffect(() => {
+        if (user) {
+            router.push(`/user/myprofile`);
+        }
+    }, [user, router]);
+
     return (
         <div className="flex justify-center min-h-screen items-center">
             <Card color="transparent" shadow={false}>
@@ -37,7 +53,7 @@ export default function SignUp() {
                                 size="lg"
                                 placeholder="John Doe"
                                 value={name}
-                                onChange={ev=>setName(ev.target.value)}
+                                onChange={ev => setName(ev.target.value)}
                                 className="!border-t-blue-gray-200 focus:!border-t-gray-900"
                                 labelProps={{
                                     className: "before:content-none after:content-none",
@@ -53,7 +69,7 @@ export default function SignUp() {
                                 size="lg"
                                 placeholder="name@mail.com"
                                 value={email}
-                                onChange={ev=>setEmail(ev.target.value)}
+                                onChange={ev => setEmail(ev.target.value)}
                                 className="!border-t-blue-gray-200 focus:!border-t-gray-900"
                                 labelProps={{
                                     className: "before:content-none after:content-none",
@@ -69,7 +85,7 @@ export default function SignUp() {
                                 size="lg"
                                 placeholder="********"
                                 value={password}
-                                onChange={ev=>setPassword(ev.target.value)}
+                                onChange={ev => setPassword(ev.target.value)}
                                 className="!border-t-blue-gray-200 focus:!border-t-gray-900"
                                 labelProps={{
                                     className: "before:content-none after:content-none",
@@ -78,7 +94,7 @@ export default function SignUp() {
                         </div>
                     </div>
                     <Checkbox
-                        onClick={()=> setTicked(!ticked)}
+                        onClick={() => setTicked(!ticked)}
                         value={ticked}
                         label={
                             <Typography
@@ -97,7 +113,7 @@ export default function SignUp() {
                         }
                         containerProps={{ className: "-ml-2.5" }}
                     />
-                    <Button className="mt-6"  disabled={!email || !password || !ticked} fullWidth onClick={signup} color='green'>
+                    <Button className="mt-6" disabled={!email || !password || !ticked} fullWidth onClick={Signup} color='green'>
                         Sign Up
                     </Button>
 
@@ -106,7 +122,7 @@ export default function SignUp() {
                             Forgot password?
                         </Link>
                     </Typography>
-                    
+
                     <Typography color="gray" className="mt-4 text-center font-normal">
                         Already have an account?{" "}
                         <Link href="/user/login" className="font-medium text-gray-900">
@@ -114,7 +130,7 @@ export default function SignUp() {
                         </Link>
                     </Typography>
                 </form>
-            </Card>
-        </div>
+            </Card >
+        </div >
     )
 }

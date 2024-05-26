@@ -1,17 +1,29 @@
 'use client'
 import { Textarea, Button, IconButton } from "@material-tailwind/react";
 import UserAvatar from "./UserAvatar";
-import { useState } from "react";
+import { useState,useContext } from "react";
+import { AuthContext } from "@/components/User/AuthContext";
 
-export default function ReviewForm() {
+export default function ReviewForm({productInfo}) {
     const [review,setReview] = useState('')
-    const postReview=()=>{
-        const data = {review}
-        console.log(data)
+    const { user } = useContext(AuthContext)
+    const postReview=async()=>{
+        const data = {
+            user: user?.displayName || 'anonymous',
+            review:review,
+            product_reference: productInfo._id
+        }
+        const res= await fetch(`/api/reviews/`,{
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+        })
     }
     return (
         <div>
-            <UserAvatar />
+            <UserAvatar user={user} />
             <div className="relative md:w-[30rem]">
                 <Textarea value={review} onChange={ev=>setReview(ev.target.value)} variant="Outlined" placeholder="Your Comment" rows={8} />
                 <div className="flex w-full justify-end py-1.5">

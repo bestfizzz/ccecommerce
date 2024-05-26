@@ -15,7 +15,7 @@ export default function ProductCard({ product,setOpenAlert }) {
     const { addProductToCart } = useContext(CartContext)
     return (
         <Card className="w-80 h-fit">
-            <Link href={'/products/' + product._id}>
+            <Link href={'/products/product-info/' + product._id}>
                 <CardHeader shadow={false} floated={false} className="h-64">
                     <img
                         src={product.images[0]?product.images[0]:"https://via.placeholder.com/300x300"}

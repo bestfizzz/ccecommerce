@@ -1,4 +1,5 @@
 'use client'
+import capitalize from "@/components/capitalize";
 import {
     Card,
     CardHeader,
@@ -24,7 +25,8 @@ import {
     );
   }
    
-  export default function UserAvatar() {
+  export default function UserAvatar({user}) {
+    const displayName = (user?.displayName) || 'Anonymous';
     return (
       <Card color="transparent" shadow={false} className="w-full max-w-[26rem]">
         <CardHeader
@@ -36,13 +38,13 @@ import {
           <Avatar
             size="lg"
             variant="circular"
-            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-            alt="tania andrew"
+            src="https://static.thenounproject.com/png/1201236-200.png"
+            alt={capitalize(displayName)}
           />
           <div className="flex w-full flex-col gap-0.5">
             <div className="flex items-center justify-between">
               <Typography variant="h5" color="blue-gray">
-                Tania Andrew
+              {capitalize(displayName)}
               </Typography>
             </div>
             <Typography color="blue-gray">Customer</Typography>

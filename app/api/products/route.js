@@ -1,11 +1,13 @@
 import { getProduct, getProducts, getProductsByCategory,getProductsBySearch } from "@/libs/products"
+import sanitize from "@/components/sanatize"
 
 export async function GET(req) {
     const { searchParams } = new URL(req.url)
-    const get = searchParams.get('get')
-    const id = searchParams.get('id')
-    const category = searchParams.get('category')
-    const search = searchParams.get('search')
+    const get = sanitize(searchParams.get('get'))
+    const id = sanitize(searchParams.get('id'))
+    const category = sanitize(searchParams.get('category'))
+    const search = sanitize(searchParams.get('search'))
+
     if (get?.toLowerCase() == 'product' && id) {
         let res = await getProduct(id)
         return Response.json(res)
@@ -26,5 +28,5 @@ export async function GET(req) {
         return Response.json(res)
     }
 
-    return Response.status(405).json({ 'error': 'invalid request' })
+    return Response.status(400).json({ 'error': 'invalid request' })
 }
