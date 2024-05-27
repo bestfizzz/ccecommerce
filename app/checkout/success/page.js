@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation'
 import { Typography } from '@material-tailwind/react'
 import { useRouter } from 'next/navigation'
 
-export default function success() {
+export default function Success() {
     const searchParams = useSearchParams()
     const router = useRouter()
     useEffect(() => {
