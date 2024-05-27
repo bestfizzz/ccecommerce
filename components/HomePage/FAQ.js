@@ -15,7 +15,7 @@ const faqs = [
 
 export default function FAQ() {
     return (
-        <section className="px-8 py-20">
+        <section id='FAQ' className="px-8 py-20">
             <div className="container mx-auto">
                 <div className="mb-14 text-center ">
                     <Typography

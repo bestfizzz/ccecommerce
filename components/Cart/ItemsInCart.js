@@ -11,7 +11,7 @@ export default function ItemsInCart() {
     const showScrollbar = noScrollbar + " overflow-y-scroll scrollbar"
 
     const directToProduct=(productId)=>{
-        router.push('/products/'+productId)
+        router.push('/products/product-info/'+productId)
     }
     return (
         <div class="scale-100 sm:scale-110 md:scale-120 xl:scale-110 xl:mx-4">

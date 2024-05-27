@@ -6,16 +6,22 @@ export const CartContext = createContext({})
 export default function CartContextProvider({ children }) {
     const ls = typeof window !== "undefined" ? localStorage : null
     const [cartProducts, setCartProducts] = useState([])
-    useEffect(() => {
-        if (cartProducts?.length > 0) {
-            ls.setItem("cart", JSON.stringify(cartProducts))
-        }
-    }, [cartProducts])
+    
     useEffect(() => {
         if (ls && ls.getItem("cart")) {
-            setCartProducts(JSON.parse(ls.getItem("cart")))
+            setCartProducts(JSON.parse(ls.getItem("cart")));
         }
-    }, [])
+    }, [ls]);
+
+    // Update localStorage whenever cartProducts changes
+    useEffect(() => {
+        if (cartProducts.length > 0) {
+            ls.setItem("cart", JSON.stringify(cartProducts));
+        } else {
+            ls.removeItem("cart");
+        }
+    }, [cartProducts, ls]);
+
     const getNumberOfProducts = () => {
         var numberArrayOfProducts = cartProducts.map(({ quantity }) => quantity)
         return numberArrayOfProducts.reduce((a, b) => a + b, 0)

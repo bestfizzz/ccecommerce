@@ -10,7 +10,7 @@ import {
   
   function TeamCard({ img, name, title }) {
     return (
-      <Card className="rounded-lg bg-[#FAFAFA]" shadow={false}>
+        <Card className="rounded-lg bg-[#FAFAFA]" shadow={false}>
         <CardBody className="text-center">
           <Avatar
             src={img}
@@ -41,6 +41,7 @@ import {
           </div>
         </CardBody>
       </Card>
+      
     );
   }
   
@@ -90,7 +91,7 @@ import {
   
   export function Troll() {
     return (
-      <section className="min-h-screen py-8 px-8">
+      <section id="about-us" className="min-h-screen py-8 px-8">
       <div className="container mx-auto">
         <div className="mb-16 text-center">
           <Typography

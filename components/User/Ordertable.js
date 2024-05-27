@@ -1,10 +1,9 @@
 import { Card, Typography } from "@material-tailwind/react";
+import truncateText from "../truncateText";
 
-const TABLE_HEAD = ["Date", "Price", "Products"];
+const TABLE_HEAD = ["Products", "Price", "Date"];
 
-const TABLE_ROWS = [];
-
-export default function OrderTable() {
+export default function OrderTable({ orders }) {
     return (
         <Card className="h-full w-full overflow-scroll ">
             <table className="w-full min-w-fit table-auto text-left">
@@ -26,14 +25,50 @@ export default function OrderTable() {
                         ))}
                     </tr>
                 </thead>
-                {TABLE_ROWS && TABLE_ROWS.length > 0 ? (
+                {orders && orders.length > 0 ? (
                     <tbody>
-                        {TABLE_ROWS.map(({ date, price, products }, index) => {
-                            const isLast = index === TABLE_ROWS.length - 1;
-                            const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
-
+                        {orders.map((order, index) => {
+                            const isLast = index === orders.length - 1;
+                            const classes = isLast ? "sm:p-4" : "sm:p-4 border-b border-blue-gray-50";
+                            const products = order.order.values
+                            const date = order.createdAt
+                            const cost = order.cost
                             return (
                                 <tr key={index}>
+                                    <td className={classes}>
+                                        {products.map((product, idx) => {
+                                            const properties=product.mapValue.fields
+                                            const title = properties.title.stringValue
+                                            const quantity = properties.quantity.integerValue
+                                            return (
+                                                <div className="flex justify-start" key={idx}>
+                                                    <Typography
+                                                        variant="small"
+                                                        color="blue-gray"
+                                                        className="font-normal mr-4"
+                                                    >
+                                                        x{quantity}
+                                                    </Typography>
+                                                    <Typography
+                                                        variant="small"
+                                                        color="blue-gray"
+                                                        className="font-normal"
+                                                    >
+                                                        {truncateText(title,20)}
+                                                    </Typography>
+                                                    
+                                                </div>)
+                                        })}
+                                    </td>
+                                    <td className={classes}>
+                                        <Typography
+                                            variant="small"
+                                            color="blue-gray"
+                                            className="font-normal"
+                                        >
+                                            {cost}
+                                        </Typography>
+                                    </td>
                                     <td className={classes}>
                                         <Typography
                                             variant="small"
@@ -42,28 +77,6 @@ export default function OrderTable() {
                                         >
                                             {date}
                                         </Typography>
-                                    </td>
-                                    <td className={classes}>
-                                        <Typography
-                                            variant="small"
-                                            color="blue-gray"
-                                            className="font-normal"
-                                        >
-                                            {price}
-                                        </Typography>
-                                    </td>
-                                    <td className={classes}>
-                                        {products.map(({ product, quantity }, idx) => (
-                                            <div key={idx}>
-                                                <Typography
-                                                    variant="small"
-                                                    color="blue-gray"
-                                                    className="font-normal"
-                                                >
-                                                    {product} ({quantity})
-                                                </Typography>
-                                            </div>
-                                        ))}
                                     </td>
                                 </tr>
                             );
