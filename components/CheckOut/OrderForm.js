@@ -28,8 +28,8 @@ export default function OrderForm() {
         setCost(() => getCost())
     }, [cartProducts])
     useEffect(() => {
-        setName(user.displayName)
-        setEmail(user.email)
+        setName(user?.displayName)
+        setEmail(user?.email)
         setInputDisabled(user?true:false)
     }, [user])
     const uploadOrder = async (data) => {
