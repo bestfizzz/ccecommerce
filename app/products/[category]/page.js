@@ -6,7 +6,7 @@ import { BreadcrumbCategory } from '@/components/Products/BreadCrumProducts';
 export default async function Products({params,searchParams}) {
     const category = params.category
     const getProductsData = async ()=>{
-        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/products?get=category&category=${category}`, {method: 'GET'});
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/products?get=category&category=${category}`, {method: 'GET',next: { revalidate: 3600 }});
         let data = await res.json()
         if (searchParams?.filter) {
             if (searchParams.filter=='popularity'){
