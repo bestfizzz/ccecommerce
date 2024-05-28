@@ -19,7 +19,7 @@ export async function POST(req) {
             }
             const orderData = { name, email, phone, address, cost, order, transactionID };
             const res = await postOrder(orderData);
-            return Response.json({ res });
+            return Response.json( res );
         } catch (error) {
             // Handle any errors
             console.error('Error creating order:', error);

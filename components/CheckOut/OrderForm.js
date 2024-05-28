@@ -9,9 +9,13 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../Cart/CartContext";
 import { checkout } from '@/libs/stripe'
+import { AuthContext } from "../User/AuthContext";
 
 export default function OrderForm() {
     const { getCost, cartProducts } = useContext(CartContext)
+    const {user}=useContext(AuthContext)
+    const [inputDisabled,setInputDisabled] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [ticked, setTicked] = useState(false)
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -23,8 +27,28 @@ export default function OrderForm() {
     useEffect(() => {
         setCost(() => getCost())
     }, [cartProducts])
+    useEffect(() => {
+        setName(user.displayName)
+        setEmail(user.email)
+        setInputDisabled(user?true:false)
+    }, [user])
+    const uploadOrder = async (data) => {
+        try {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/orders`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data)
+            });
+            return res.json()
+        } catch (error) {
+            return {error: error}
+        }
+    }
     const submitOrder = async (ev) => {
         ev.preventDefault();
+        setLoading(true)
         const data = {
             name: name,
             email: email,
@@ -32,23 +56,19 @@ export default function OrderForm() {
             address: address,
             cost: cost,
             order: cartProducts,
-            action:'post'
+            action: 'post'
         }
 
         if (ticked && cost > 0) {
             try {
                 setAlert('Creating Order...')
                 setOpenAlert(true)
-                const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/orders/`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(data)
-                });
-
-                if (!res.ok) {
+                const res = await uploadOrder(data)
+                console.log(res)
+                if (!res || res.error) {
                     setAlert('Something went wrong')
+                    setLoading(false)
+                    return false
                 } else {
                     setAlert('Redirecting to payment...')
                 }
@@ -58,7 +78,7 @@ export default function OrderForm() {
                     quantity: item.quantity
                 }));
 
-                await checkout({ lineItems: stripeCart, email: email });
+                await checkout({ lineItems: stripeCart, email: email, orderId: res });
 
                 // Redirect after successful checkout initiation
                 console.log("Redirecting to payment...");
@@ -67,6 +87,7 @@ export default function OrderForm() {
                 // Handle the error appropriately here
             }
         }
+        setLoading(false)
     };
 
     return (
@@ -80,8 +101,8 @@ export default function OrderForm() {
                 </Typography>
                 <form onSubmit={submitOrder} className="mt-8 mb-2 max-w-screen-lg md:w-auto md:pr-7 sm:min-w-80 w-auto">
                     <div className="mb-4 flex flex-col gap-6">
-                        <Input size="lg" value={name} onChange={ev => setName(ev.target.value)} required label="Name" />
-                        <Input size="lg" value={email} onChange={ev => setEmail(ev.target.value)} required label="Email" />
+                        <Input size="lg"  value={name} onChange={ev => setName(ev.target.value)} disabled={inputDisabled} required={!inputDisabled} label="Name" />
+                        <Input size="lg" value={email} onChange={ev => setEmail(ev.target.value)} disabled={inputDisabled} required={!inputDisabled} label="Email" />
                         <Input size="lg" value={phone} onChange={ev => setPhone(ev.target.value)} required label="Phone" />
                         <Input size="lg" value={address} onChange={ev => setAddress(ev.target.value)} required label="Address" />
                     </div>
@@ -101,7 +122,7 @@ export default function OrderForm() {
                         containerProps={{ className: "-ml-2.5" }}
                         onClick={() => setTicked(!ticked)}
                     />
-                    <Button color='green' disabled={!ticked || cost <= 0} type="submit" className="mt-6" fullWidth>
+                    <Button color='green' disabled={!ticked || cost <= 0 || loading} type="submit" className="mt-6" fullWidth>
                         Comfirm
                     </Button>
                 </form>

@@ -1,6 +1,6 @@
 import { loadStripe } from "@stripe/stripe-js";
 
-export async function checkout({ lineItems, email }) {
+export async function checkout({ lineItems, email,orderId }) {
   let stripePromise = null;
 
   const getStripe = () => {
@@ -16,7 +16,8 @@ export async function checkout({ lineItems, email }) {
     mode: 'payment',
     lineItems,
     customerEmail: email,
-    successUrl: `${process.env.NEXT_PUBLIC_URL}/checkout/success?payment_id={CHECKOUT_SESSION_ID}`,
-    cancelUrl: process.env.NEXT_PUBLIC_URL
+    successUrl: `${process.env.NEXT_PUBLIC_URL}/checkout/success?payment_id={CHECKOUT_SESSION_ID}&client_reference_id=${orderId}`,
+    cancelUrl: process.env.NEXT_PUBLIC_URL,
+    clientReferenceId: orderId
   });
 }

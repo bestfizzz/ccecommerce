@@ -1,19 +1,23 @@
 'use client'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Typography } from '@material-tailwind/react'
 import { useRouter } from 'next/navigation'
+import { CartContext } from '@/components/Cart/CartContext'
 
 export default function Success() {
     const searchParams = useSearchParams()
     const router = useRouter()
+    const {wipeCart}=useContext(CartContext)
     useEffect(() => {
+        wipeCart()
         const redirectTimeout = setTimeout(() => {
             router.push('/');
         }, 3000)
         return () => clearTimeout(redirectTimeout)
     }, []);
     const id = searchParams.get('payment_id')
+    const orderid = searchParams.get('client_reference_id')
     return (
         <div className="min-h-[400px] mt-3">
             <Typography variant="h2">
@@ -24,6 +28,7 @@ export default function Success() {
                     Order Successed, redirecting ...
                 </span>
             </Typography>
+            <h1>Order:{orderid}</h1>
             <h1>PaymentID:{id}</h1>
         </div>
     )
