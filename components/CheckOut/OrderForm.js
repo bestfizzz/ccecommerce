@@ -64,7 +64,6 @@ export default function OrderForm() {
                 setAlert('Creating Order...')
                 setOpenAlert(true)
                 const res = await uploadOrder(data)
-                console.log(res)
                 if (!res || res.error) {
                     setAlert('Something went wrong')
                     setLoading(false)
