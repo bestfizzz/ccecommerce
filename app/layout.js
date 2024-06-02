@@ -11,6 +11,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "COCO",
   description: "Fresh organic food from the farm",
+  icons: {
+    icon: '/favicon.ico', // /public path
+  },
 };
 
 export default async function RootLayout({ children }) {
