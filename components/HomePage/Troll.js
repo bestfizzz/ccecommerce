@@ -48,42 +48,42 @@ import {
   
   const members = [
     {
-      img: `https://www.material-tailwind.com/img/avatar1.jpg`,
+      img: `https://storage.googleapis.com/shop-384517.appspot.com/MicrosoftTeams-image-88-scaled.jpg`,
       name: "Ali",
       title: "COCO Owner",
     },
     {
-      img: `https://www.material-tailwind.com/img/avatar2.jpg`,
+      img: `https://storage.googleapis.com/shop-384517.appspot.com/Viju-scaled%20(1).jpg`,
+      name: "Viju",
+      title: `I just know he\'s at the farm`,
+    },
+    {
+      img: `https://i.kinja-img.com/image/upload/c_fill,h_675,pg_1,q_80,w_1200/ilgocjh44rkkzjik1xsx.jpg`,
       name: "Pig",
       title: "Animal at the farm",
     },
     {
-      img: `https://www.material-tailwind.com/img/avatar5.jpg`,
+      img: `https://png.pngtree.com/png-clipart/20230318/ourmid/pngtree-cute-cow-avatar-png-image_6654534.png`,
       name: "Cow",
       title: "Animal at the farm",
     },
     {
-      img: `https://www.material-tailwind.com/img/avatar4.jpg`,
+      img: `https://media.4-paws.org/3/b/f/3/3bf3d0cc53c66fee4a861a23d773ab0f3aa4729f/VIER%20PFOTEN_2019-10-10_041-2668x2667-600x600.jpg`,
       name: "Chicken",
       title: "Animal at the farm",
     },
     {
-      img: `https://www.material-tailwind.com/img/avatar6.jpg`,
-      name: "Emma Roberts",
+      img: `https://t3.gstatic.com/licensed-image?q=tbn:ANd9GcTQMf0rCi-1SbtjliBP4itP5HciQ88PN2gUFvtVhufKgL4oBZVTqLRNUQzmI5eya1pi`,
+      name: "Goat",
       title: "Animal at the farm",
     },
     {
-      img: `https://www.material-tailwind.com/img/avatar3.jpg`,
-      name: "William Pearce",
-      title: "Animal at the farm",
+      img: "https://photos.smugmug.com/Photo-Essay-Galleries/We-All-Honk/i-f7sSpvp/1/DdKRPm8xfGnN4jZQqLcqBCj432vWZgsHnC7rLsTw2/XL/DSC_4752-XL.jpg",
+      name: "Goose",
+      title: "HONK! HONK! HONK! HONK! HONK!",
     },
     {
-      img: "https://www.material-tailwind.com/image/avatar7.svg",
-      name: "Bruce Mars",
-      title: "Animal at the farm",
-    },
-    {
-      img: "https://www.material-tailwind.com/image/avatar8.svg",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGbzD574hh0Hy5dGwH8WJii5RLZxQirzGj_g&s",
       name: "Vegetables",
       title: "and more...",
     },
