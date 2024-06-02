@@ -20,7 +20,7 @@ export default async function RootLayout({ children }) {
   const categoryList = await getCategories()///fucking nextjs npm run build on production doesnt serve api routes
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={inter.className + 'bg-white'}>
         <AuthProvider>
         <CartContextProvider>
         <Suspense>
