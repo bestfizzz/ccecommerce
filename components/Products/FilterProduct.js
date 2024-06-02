@@ -23,6 +23,7 @@ export function FilterProduct() {
                         mount: { y: 0 },
                         unmount: { y: 25 },
                     }}
+                    className='min-w-[100px]'
                 >
                     <Option value="popularity">Popularity</Option>
                     <Option value="availability">Availabilty</Option>
