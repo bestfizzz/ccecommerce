@@ -16,5 +16,6 @@ module.exports = withMT({
       },
     },
   },
+  darkMode: ['variant', '@media (prefers-color-scheme: light) { &:not(.enforced) }'],
   plugins: [],
 });
