@@ -102,7 +102,7 @@ export default function OrderForm() {
                     <div className="mb-4 flex flex-col gap-6">
                         <Input size="lg"  value={name} onChange={ev => setName(ev.target.value)} disabled={inputDisabled} required={!inputDisabled} label="Name" />
                         <Input size="lg" value={email} onChange={ev => setEmail(ev.target.value)} disabled={inputDisabled} required={!inputDisabled} label="Email" />
-                        <Input size="lg" value={phone} onChange={ev => setPhone(ev.target.value)} required label="Phone" />
+                        <Input maxlength="11" type="tel" pattern="(\+|00)?[0-9]{2}[0-9]{8,9}" title="Field must be 10-11 characters long" required size="lg" value={phone} onChange={ev => setPhone(ev.target.value)} required label="Phone" />
                         <Input size="lg" value={address} onChange={ev => setAddress(ev.target.value)} required label="Address" />
                     </div>
                     <Checkbox
