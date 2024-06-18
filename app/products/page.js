@@ -7,9 +7,9 @@ export default async function Products({ params, searchParams }) {
     const getProductsData = async () => {
         let res=''
         if (searchParams?.search) {
-            res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/products?get=search&search=${searchParams.search}`, { method: 'GET',next: { revalidate: 3600 } })
+            res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/products?get=search&search=${searchParams.search}`, { method: 'GET',cache:'no-cache' })
         } else {
-            res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/products?get=all`, { method: 'GET',next: { revalidate: 3600 } })
+            res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/products?get=all`, { method: 'GET',cache:'no-cache' })
         }
         let data = await res.json()
         if (searchParams?.filter) {

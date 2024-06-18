@@ -7,7 +7,7 @@ import Review from "@/components/Products/Review/Review";
 export default async function ProductPage({ params }) {
     const id = params.productID
     const getProductData = async (id) => {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/products?get=product&id=${id}`, { method: 'GET', next: { revalidate: 3600 } });
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/products?get=product&id=${id}`, { method: 'GET',cache:'no-cache' });
         return res.json()
     }
     const getProductReviews = async (id) => {
