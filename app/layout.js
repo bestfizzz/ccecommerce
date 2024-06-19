@@ -2,8 +2,8 @@ import { Inter } from "next/font/google";
 import Layout from "@/components/Layout";
 import "./globals.css";
 import CartContextProvider from "@/components/Cart/CartContext";
-import { Suspense } from "react";
 import { getCategories } from "@/libs/categories";
+import { Suspense } from "react";
 import { AuthProvider } from "@/components/User/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -17,7 +17,11 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const categoryList = await getCategories()///fucking nextjs npm run build on production doesnt serve api routes
+  async function getCategoriesListMenu(){
+    'use server';
+    return await getCategories()
+  }
+  const categoryList = await getCategoriesListMenu()///fucking nextjs npm run build on production doesnt serve api routes
   return (
     <html lang="en">
       <link rel="icon" href="/favicon.ico" sizes="any" />
