@@ -4,6 +4,7 @@ import "./globals.css";
 import CartContextProvider from "@/components/Cart/CartContext";
 import { Suspense } from "react";
 import { AuthProvider } from "@/components/User/AuthContext";
+import { revalidatePath } from 'next/cache'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +18,7 @@ export const metadata = {
 async function getCategoriesListMenu(){
   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/categories`, {method: 'GET',cache:'no-cache'});
   let data = await res.json()
+  revalidatePath('/', 'layout')
   return data
 }
 
