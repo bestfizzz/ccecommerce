@@ -12,7 +12,7 @@ export const metadata = {
   title: "COCO",
   description: "Fresh organic food from the farm",
   icons: {
-    icon: '/favicon.ico', // /public path
+    icon: '/icon.ico', // /public path
   },
 };
 
