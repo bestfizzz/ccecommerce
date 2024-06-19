@@ -29,10 +29,9 @@ function buildHierarchy(data) {
 
     // Initialize the result structure and a set to track top-level items
     const topLevelIds = new Set(data.filter(item => !item.parentCategory).map(item => item._id));
-
     // Organize items under their respective parents
     data.forEach(item => {
-        const parentId = item.parentCategory;
+        const parentId = encodeURI(item.parentCategory);
         if (parentId) {
             const parent = itemsMap[parentId];
             if (parent) {

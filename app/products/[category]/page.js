@@ -21,7 +21,7 @@ export default async function Products({params,searchParams}) {
     const products = await getProductsData()
     return (
         <div className='mx-4'>
-            <BreadcrumbCategory category_name={category} />
+            <BreadcrumbCategory category_name={decodeURI(category)} />
             <ProductHeader />
             <Suspense fallback={<Loading />}>
                 {products?
