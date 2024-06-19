@@ -40,7 +40,6 @@ export const getProducts = async () => {
 
 export const getProductsByCategory = async (category) => {
     try {
-        console.log(category)
         const productQuery = query(productsCollection, where("category", "==", encodeURI(category.toLowerCase())));
         const snapshot = await getDocs(productQuery);
         const productList = snapshot.docs.map(doc => ({
@@ -62,8 +61,8 @@ export const getProductsByCategoryDesendences = async (category, productList = [
         productList.push(...products);
         const categoryProperties = categoryStructure.find(c => { return c.parentCategory == category })
         // Recursively get products from each child category
-        if (categoryProperties) {
-            for (const childCategory of [categoryProperties]) {
+        if (categoryProperties!=[]) {
+            for (const childCategory of categoryProperties) {
                 await getProductsByCategoryDesendences(childCategory?.name, productList);
             }
         }
