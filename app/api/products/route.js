@@ -19,7 +19,7 @@ export async function GET(req) {
     }
 
     if (get?.toLowerCase() == 'category' && category) {
-        let res = category.toLowerCase() == 'all' ? await getProducts() : await getProductsByCategoryDesendences(category)
+        let res = decodeURI(category.toLowerCase()) == 'all' ? await getProducts() : await getProductsByCategoryDesendences(category)
         return Response.json(res)
     }
 
