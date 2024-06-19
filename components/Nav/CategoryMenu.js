@@ -8,6 +8,7 @@ import {
     Typography,
 } from "@material-tailwind/react";
 import Link from "next/link";
+import capitalize from "../capitalize";
 
 export default function NestedMenu({ categoryList }) {
     return (
@@ -33,6 +34,11 @@ export default function NestedMenu({ categoryList }) {
                 </Link>
             </MenuHandler>
             <MenuList>
+                <Link href={`/products/`}>
+                    <MenuItem>
+                        All products
+                    </MenuItem>
+                </Link>
                 {categoryList.map(category => {
                     return MenuIncursion(category)
                 })
@@ -56,7 +62,7 @@ const MenuIncursion = (category) => {
                 <MenuHandler className="flex items-center justify-between">
                     <Link href={`/products/${category.name}`}>
                         <MenuItem className="flex items-center justify-between">
-                            {category.name}
+                            {capitalize(category.name)}
                             <ChevronUpIcon
                                 strokeWidth={2.5}
                                 className={`h-3.5 w-3.5 transition-transform ${openNested ? "rotate-90" : ""
@@ -77,7 +83,7 @@ const MenuIncursion = (category) => {
         return (
             <Link href={`/products/${category.name}`}>
                 <MenuItem>
-                    {category.name}
+                    {capitalize(category.name)}
                 </MenuItem>
             </Link>
         )
