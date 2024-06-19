@@ -73,7 +73,7 @@ export default function OrderForm() {
                 }
                 setOpenAlert(true)
                 const stripeCart = cartProducts.map(item => ({
-                    price: item.stripeID,
+                    price: item.stripeId,
                     quantity: item.quantity
                 }));
 
