@@ -59,7 +59,7 @@ export const getProductsByCategoryDesendences = async (category, productList = [
         const products = await getProductsByCategory(category);
         // Add products to the productList
         productList.push(...products);
-        const categoryProperties = categoryStructure.find(c => { return c.parentCategory == category })
+        const categoryProperties = categoryStructure.filter(c => { return c.parentCategory == category })
         // Recursively get products from each child category
         if (categoryProperties!=[]) {
             for (const childCategory of categoryProperties) {
