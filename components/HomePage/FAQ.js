@@ -5,13 +5,14 @@ import { Typography } from "@material-tailwind/react";
 const faqs = [
     {
         title: "How do I order?",
-        desc: "We're not always in the position that we want to be at. We're constantly growing. We're constantly making mistakes. We're constantly trying to express ourselves and actualize our dreams. If you have the opportunity to play this game of life you need to appreciate every moment. A lot of people don't appreciate the moment until it's passed.",
+        desc: "To place an order, visit our website and browse through our products. Select the items you wish to purchase, add them to your cart, and proceed to checkout. Follow the prompts to enter your shipping address and payment details to complete your order.",
     },
     {
-        title: "How can i make the payment?",
-        desc: "It really matters and then like it really doesn't matter. What matters is the people who are sparked by it. And the people who are like offended by it, it doesn't matter. Because it's about motivating the doers. Because I'm here to follow my dreams and inspire other people to follow their dreams, too. We're not always in the position that we want to be at.",
+        title: "How can I make the payment?",
+        desc: "We accept various payment methods including credit/debit cards, PayPal, and bank transfers. During checkout, you can choose your preferred payment option and follow the instructions to securely complete the transaction.",
     },
 ];
+
 
 export default function FAQ() {
     return (
