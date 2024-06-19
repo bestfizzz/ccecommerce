@@ -28,16 +28,7 @@ import {
           >
             {title}
           </Typography>
-          <div className="flex items-center justify-center gap-1.5">
-            <IconButton variant="text" color="gray">
-              <i className="fa-brands fa-twitter text-lg" />
-            </IconButton>
-            <IconButton variant="text" color="gray">
-              <i className="fa-brands fa-linkedin text-lg" />
-            </IconButton>
-            <IconButton variant="text" color="gray">
-              <i className="fa-brands fa-dribbble text-lg" />
-            </IconButton>
+          <div className="flex items-center justify-center gap-1.5 h-[40px]">
           </div>
         </CardBody>
       </Card>
