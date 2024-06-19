@@ -2,7 +2,6 @@ import { Inter } from "next/font/google";
 import Layout from "@/components/Layout";
 import "./globals.css";
 import CartContextProvider from "@/components/Cart/CartContext";
-import { getCategories } from "@/libs/categories";
 import { Suspense } from "react";
 import { AuthProvider } from "@/components/User/AuthContext";
 
@@ -15,12 +14,14 @@ export const metadata = {
     icon: '/icon.ico', // /public path
   },
 };
+async function getCategoriesListMenu(){
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/categories`, {method: 'GET',cache:'no-cache'});
+  let data = await res.json()
+  return data
+}
 
 export default async function RootLayout({ children }) {
-  async function getCategoriesListMenu(){
-    'use server';
-    return await getCategories()
-  }
+
   const categoryList = await getCategoriesListMenu()///fucking nextjs npm run build on production doesnt serve api routes
   return (
     <html lang="en">
