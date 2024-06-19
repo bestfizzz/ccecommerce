@@ -69,9 +69,9 @@ export default function ProductInfo({ productInfo }) {
                     </Button>
                     <Typography variant='h4'>Properties</Typography>
                     {productInfo.properties ? Object.keys(productInfo.properties).map((key, index) => {
-                        return (
-                            <Typography key={index} className="ml-4 font-thin" variant='h5'>- {capitalize(key)}: {productInfo.properties[key]}</Typography>
-                        )
+                        if (productInfo.properties[key] != '' && productInfo.properties[key]) {
+                            return <Typography key={index} className="ml-4 font-thin" variant='h5'>- {capitalize(key)}: {productInfo.properties[key]}</Typography>
+                        }
                     })
                         :
                         <Typography variant='h5'>No properties</Typography>
