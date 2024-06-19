@@ -29,7 +29,7 @@ export default function Hero() {
   return (
     <>
       <header className="bg-white">
-        <div className="p-8 grid min-h-[250px] w-full lg:h-[450px] md:h-[350px] place-items-stretch bg-[url('https://sb.ecobnb.net/app/uploads/sites/3/2021/01/organic-food-benefits.jpg')] bg-center bg-cover bg-no-repeat">
+        <div className="p-8 grid min-h-[250px] w-full lg:h-[450px] md:h-[350px] place-items-stretch bg-[url('/organic-food-benefits.jpg')] bg-center bg-cover bg-no-repeat">
           <div className="container mx-auto px-4 text-center">
             <Typography
               variant="h1"
