@@ -11,6 +11,8 @@ export default async function User() {
     const router = useRouter()
     const { user, signout } = useContext(AuthContext)
     const [orders, setOrders] = useState('')
+    const [error, setError] = useState(false)
+    const [loading, setLoading] = useState(true)
     if (!user) {
         router.push(`/user/login`)
     }
@@ -34,27 +36,39 @@ export default async function User() {
         return res.json()
     }
     useEffect(() => {
+        
         const fetchOrders = async () => {
+            setLoading(true)
             if (user?.email && user?.accessToken) {
                 try {
                     const orders = await getOrders();
                     setOrders(orders);
                 } catch (error) {
                     console.error('Error fetching orders:', error);
+                    setError(true)
                 }
             }
+            setLoading(false)
         };
         fetchOrders();
-    }, [user]);    
+    }, [user]);
     return (
         <>
             {user ?
                 <div className="px-2 md:px-8 flex-col justify-center w-full">
                     <Typography variant="h1">Hi, {user.displayName}</Typography>
                     <Typography variant="h4">Your orders</Typography>
-                    <Suspense fallback={Loading}>
-                        <OrderTable orders={orders} />
-                    </Suspense>
+                    {loading==false && orders ?
+                        <>
+                            {!error ?
+                                <OrderTable orders={orders} />
+                                :
+                                <Typography variant="h1">Failed to get orders</Typography>
+                            }
+                        </>
+                        :
+                        <Loading />
+                    }
                     <div className="flex w-full justify-end py-1.5">
                         <div className="flex gap-2">
                             <Link href={'/'}>

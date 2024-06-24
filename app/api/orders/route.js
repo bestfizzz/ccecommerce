@@ -34,7 +34,7 @@ export async function POST(req) {
             return Response.json(res);
         } catch (error) {
             console.error('Failed to get orders:', error.message);
-            return Response.json({ error: 'unauthorized', status: 401 });
+            throw new Error(error.message);
         }
     }
     return Response.json({ error: 'invalid request', status: 402 });
