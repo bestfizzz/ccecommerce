@@ -40,7 +40,7 @@ export const getProducts = async () => {
 
 export const getProductsByCategory = async (category) => {
     try {
-        const productQuery = query(productsCollection, where("category", "==", encodeURI(category.toLowerCase())));
+        const productQuery = query(productsCollection, where("category", "==", category.toLowerCase()));
         const snapshot = await getDocs(productQuery);
         const productList = snapshot.docs.map(doc => ({
             _id: doc.id,
