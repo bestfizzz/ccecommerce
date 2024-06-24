@@ -9,8 +9,11 @@ import { useState } from "react";
 
 export default function Hero() {
   const [email, setEmail] = useState('')
+  const [message, setMessage] = useState('')
+  const [color, setColor] = useState('')
   const [openAlert, setOpenAlert] = useState(false)
-  const sendEmail = async () => {
+  const sendEmail = async (ev) => {
+    ev.preventDefault();
     const data = {
       email: email,
     }
@@ -23,6 +26,12 @@ export default function Hero() {
     })
     if (res.status === 200) {
       setEmail('')
+      setColor('green')
+      setMessage('We have received your email')
+      setOpenAlert(true)
+    } else{
+      setColor('red')
+      setMessage('Something went wrong')
       setOpenAlert(true)
     }
   }
@@ -54,16 +63,29 @@ export default function Hero() {
               color. For standing out.
             </Typography>
             <div className="mt-8 grid w-full place-items-start md:justify-center">
-              <div className="mb-2 flex w-full flex-col gap-4 md:flex-row">
-                <Input color="gray" value={email} onChange={ev => setEmail(ev.target.value)} className="bg-white" label="Enter your email" size="lg" />
-                <Button
-                  color="gray"
-                  className="w-full px-4 md:w-[12rem]"
-                  onClick={sendEmail}
-                >
-                  get started
-                </Button>
-              </div>
+              <form onSubmit={sendEmail}>
+                <div className="mb-2 flex w-full flex-col gap-4 md:flex-row">
+                  <Input
+                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                    title="Please enter a valid email address"
+                    color="gray"
+                    type="email"
+                    value={email}
+                    onChange={ev => setEmail(ev.target.value)}
+                    className="bg-white"
+                    label="Enter your email"
+                    size="lg"
+                    required
+                  />
+                  <Button
+                    color="gray"
+                    className="w-full px-4 md:w-[12rem]"
+                    type="submit"
+                  >
+                    get started
+                  </Button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -75,9 +97,10 @@ export default function Hero() {
           mount: { y: 0 },
           unmount: { y: 100 },
         }}
+        color={color}
         className='ml-3 sm:ml-8 w-[95%] bottom-[5%] fixed z-50'
       >
-        We have received your email
+        {message}
       </Alert>
     </>
   );
