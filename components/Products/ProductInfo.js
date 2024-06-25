@@ -69,11 +69,13 @@ export default function ProductInfo({ productInfo }) {
                         </svg>
                     </Button>
                     <Typography variant='h4'>Properties</Typography>
-                    {productInfo.properties ? Object.keys(productInfo.properties).map((key, index) => {
-                        if (productInfo.properties[key] != '' && productInfo.properties[key]) {
-                            return <Typography key={index} className="ml-4 font-thin" variant='h5'>- {capitalize(key)}: {productInfo.properties[key]}</Typography>
-                        }
-                    })
+                    {productInfo.properties && Object.keys(productInfo.properties).length>0 ?
+                        Object.keys(productInfo.properties).map((key, index) => {
+                            if (productInfo.properties[key] != '' && productInfo.properties[key]) {
+                                return <Typography key={index} className="ml-4 font-thin" variant='h5'>- {capitalize(key)}: {productInfo.properties[key]}</Typography>
+                            }
+                            return null
+                        }) || <Typography variant='h5'>No properties</Typography>
                         :
                         <Typography variant='h5'>No properties</Typography>
                     }
