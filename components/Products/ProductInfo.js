@@ -4,6 +4,7 @@ import { Typography, Button, Alert } from "@material-tailwind/react";
 import capitalize from "../capitalize";
 import ProductImages from "@/components/Products/ProductImages";
 import { CartContext } from "@/components/Cart/CartContext";
+import { numberWithCommas } from "../numberWithCommas";
 export default function ProductInfo({ productInfo }) {
     const { addProductToCart } = useContext(CartContext)
     const [quantityValue, setQuantityValue] = useState(0);
@@ -40,7 +41,7 @@ export default function ProductInfo({ productInfo }) {
                         {capitalize(productInfo.title)}
                     </Typography>
                     <Typography variant='lead' className="font-thin">{productInfo.category}</Typography>
-                    <Typography variant='h4'>{productInfo.price}₫</Typography>
+                    <Typography variant='h4'>{numberWithCommas(productInfo.price)}₫</Typography>
                     <div className="flex items-center">
                         <button
                             className="px-2 py-1 bg-gray-200 text-gray-600 rounded-l"
