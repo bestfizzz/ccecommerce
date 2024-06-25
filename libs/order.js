@@ -57,6 +57,8 @@ export const getUserOrders = async (idToken, email) => {
 
         const data = await response.json();
         const orderList = data.map(doc => {
+            if (doc.document?.fields){
+            console.log('pass')
             const order = doc.document.fields;
             return {
                 _id: doc.document.name.split('/').pop(),
@@ -70,16 +72,19 @@ export const getUserOrders = async (idToken, email) => {
                         null;
                     return acc;
                 }, {})
-            };
+            };}
         });
+        if (orderList[0] != undefined){
+        console.log(orderList)
         const filteredOrderList = orderList.filter(order => { return order.transactionID !== null && order.transactionID !== '' })
         filteredOrderList.sort((a, b) => b.createdAt - a.createdAt);
         const formattedOrderList = filteredOrderList.map(order => ({
             ...order,
             createdAt: formatDate(order.createdAt)
         }));
-
         return formattedOrderList;
+        }
+        return []
     } catch (err) {
         console.error(err);
         throw new Error(err)
